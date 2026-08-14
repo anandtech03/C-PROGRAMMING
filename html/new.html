@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Book Store - Rajkiya Engineering College, Banda</title>
+    
+    <style>
+        /* ==========================================================================
+           1. RESET & BASE STYLES
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --primary-blue: #1e40af;
+            --primary-dark: #1e3a8a;
+            --accent-blue: #2563eb;
+            --light-blue: #eff6ff;
+            --hover-blue: #3b82f6;
+            --bg-gray: #f8fafc;
+            --card-bg: #ffffff;
+            --text-dark: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.12);
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ==========================================================================
+           2. HEADER & NAVIGATION
+           ========================================================================== */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        /* Styling for the REC Banda Logo */
+        .college-logo-img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .college-info .college-name {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .college-info .site-name {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: var(--primary-dark);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            display: block;
+            padding: 14px 22px;
+            color: #ffffff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover,
+        .nav-links li a.active {
+            background-color: var(--accent-blue);
+        }
+
+        /* ==========================================================================
+           3. HERO SECTION
+           ========================================================================== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--accent-blue) 100%);
+            color: #ffffff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.4rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-hero {
+            display: inline-block;
+            background-color: #ffffff;
+            color: var(--primary-dark);
+            padding: 12px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .btn-hero:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* ==========================================================================
+           4. MAIN LAYOUT (SIDEBAR & CONTENT)
+           ========================================================================== */
+        .main-container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 30px;
+            flex-grow: 1;
+        }
+
+        /* Sidebar Section */
+        aside.sidebar {
+            background-color: var(--card-bg);
+            padding: 24px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            height: fit-content;
+        }
+
+        .sidebar h3 {
+            font-size: 1.2rem;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-blue);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-list li {
+            margin-bottom: 10px;
+        }
+
+        .category-list a {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            color: var(--text-dark);
+            font-weight: 500;
+            background-color: var(--bg-gray);
+            transition: var(--transition);
+        }
+
+        .category-list a:hover {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding-left: 18px;
+        }
+
+        /* Main Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-blue);
+            margin-top: 6px;
+            border-radius: 2px;
+        }
+
+        /* Featured Books Grid */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+        }
+
+        .book-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--hover-blue);
+        }
+
+        .book-img-placeholder {
+            width: 100%;
+            height: 180px;
+            background-color: var(--light-blue);
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+
+        .book-img-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 8px;
+            fill: currentColor;
+        }
+
+        .book-dept {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+        }
+
+        .book-title {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .book-author {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .book-footer {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 10px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .book-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+        }
+
+        .btn-card {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            transition: var(--transition);
+        }
+
+        .btn-card:hover {
+            background-color: var(--accent-blue);
+        }
+
+        /* About Section */
+        .about-section {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+
+        .about-section p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* ==========================================================================
+           5. FOOTER
+           ========================================================================== */
+        footer {
+            background-color: var(--primary-dark);
+            color: #ffffff;
+            margin-top: auto;
+            padding: 40px 20px 20px 20px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 15px;
+        }
+
+        .footer-college {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-contact {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .footer-contact a {
+            color: var(--light-blue);
+            transition: var(--transition);
+        }
+
+        .footer-contact a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-divider {
+            width: 100%;
+            max-width: 1200px;
+            height: 1px;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin: 15px 0;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+
+        /* ==========================================================================
+           6. RESPONSIVE MEDIA QUERIES
+           ========================================================================== */
+        @media (max-width: 850px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                order: -1;
+            }
+
+            .header-top {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .brand-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .nav-links li a {
+                padding: 10px 14px;
+                font-size: 0.88rem;
+            }
+
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-contact {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ================= HEADER SECTION ================= -->
+    <header>
+        <div class="header-top">
+            <div class="brand-container">
+                <!-- Rajkiya Engineering College, Banda Logo -->
+                <img src="about_logo.png" alt="Rajkiya Engineering College Banda Logo" class="college-logo-img">
+                
+                <div class="college-info">
+                    <div class="college-name">Rajkiya Engineering College, Banda</div>
+                    <h1 class="site-name">Online Book Store</h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav>
+            <div class="nav-container">
+                <ul class="nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Login</a></li>
+                    <li><a href="#">Registration</a></li>
+                    <li><a href="#catalogue">Catalogue</a></li>
+                    <li><a href="#">Cart</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================= HERO SECTION ================= -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Welcome to the Online Book Store</h2>
+            <p>Your official digital repository to browse, search, and purchase engineering textbooks and academic resources tailored for your department.</p>
+            <a href="#catalogue" class="btn-hero">Browse Books</a>
+        </div>
+    </section>
+
+    <!-- ================= MAIN CONTAINER ================= -->
+    <div class="main-container">
+
+        <!-- Sidebar: Categories -->
+        <aside class="sidebar">
+            <h3>Categories</h3>
+            <ul class="category-list">
+                <li><a href="#">Information Technology(IT)<span>&rarr;</span></a></li>
+                <li><a href="#">Electrical Engineering(EE) <span>&rarr;</span></a></li>
+                <li><a href="#">Mechanical Engineering(ME)<span>&rarr;</span></a></li>
+               
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-area">
+
+            <!-- Featured Books Section -->
+            <section class="featured-section" id="catalogue">
+                <h2 class="section-title">Featured Books</h2>
+                <div class="books-grid">
+
+                    <!-- Book Card 1 -->
+                    <article class="book-card">
+                        <div class="book-img-placeholder">
+                            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                            <span class="book-dept">IT</span>
+                        </div>
+                        <h3 class="book-title">Data Structures & Algorithms</h3>
+                        <p class="book-author">By Cormen, Leiserson</p>
+                        <div class="book-footer">
+                            <span class="book-price">&#8377;650</span>
+                            <a href="#" class="btn-card">View Details</a>
+                        </div>
+                    </article>
+
+                    <!-- Book Card 2 -->
+                    <article class="book-card">
+                        <div class="book-img-placeholder">
+                            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                            <span class="book-dept">EE</span>
+                        </div>
+                        <h3 class="book-title">Digital Signal Processing</h3>
+                        <p class="book-author">By John G. Proakis</p>
+                        <div class="book-footer">
+                            <span class="book-price">&#8377;580</span>
+                            <a href="#" class="btn-card">View Details</a>
+                        </div>
+                    </article>
+
+                    <!-- Book Card 3 -->
+                    <article class="book-card">
+                        <div class="book-img-placeholder">
+                            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                            <span class="book-dept">EE</span>
+                        </div>
+                        <h3 class="book-title">Electrical Power Systems</h3>
+                        <p class="book-author">By C.L. Wadhwa</p>
+                        <div class="book-footer">
+                            <span class="book-price">&#8377;490</span>
+                            <a href="#" class="btn-card">View Details</a>
+                        </div>
+                    </article>
+
+                    <!-- Book Card 4 -->
+                    <article class="book-card">
+                        <div class="book-img-placeholder">
+                            <svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+                            <span class="book-dept">ME</span>
+                        </div>
+                        <h3 class="book-title">Structural Analysis</h3>
+                        <p class="book-author">By R.C. Hibbeler</p>
+                        <div class="book-footer">
+                            <span class="book-price">&#8377;720</span>
+                            <a href="#" class="btn-card">View Details</a>
+                        </div>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about-section">
+                <h2 class="section-title">About the Online Book Store</h2>
+                <p>
+                    The Online Book Store at Rajkiya Engineering College, Banda is an academic initiative designed to streamline access to essential course materials for engineering students. Our platform provides a centralized, user-friendly space to explore, search, and procure core syllabus textbooks, technical reference manuals, and competitive examination guides. Tailored to align with our specific engineering departments, this platform ensures students have the exact learning resources required to succeed in their academic journey.
+                </p>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-college">Rajkiya Engineering College, Banda</div>
+            <div class="footer-contact">
+                <span>Email: <a href="mailto:bookstore@recbanda.ac.in">bookstore@recbanda.ac.in</a></span>
+                <span>|</span>
+                <span>Phone: +91 5192 223300</span>
+            </div>
+            <div class="footer-divider"></div>
+            <div class="copyright">
+                Copyright &copy; 2026 Online Book Store. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

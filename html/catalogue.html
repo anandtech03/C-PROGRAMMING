@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .cart {
+            text-align: right;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: auto;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        button {
+            background-color: #28a745;
+            color: black;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+        .title-box{
+          background-color: #0878df;
+          color:black;
+          width:50%;
+          margin: 10px auto;
+          paddding: 10px 0;
+          text-align: center;
+          border-radius: 30px
+  
+          
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="title-box"> <h1>📖Information Technology   <br> 📖  (Book Catalogue) 📖  </h1></div>
+    
+
+    <div class="cart">
+        🛒 Cart: <span id="cartCount">0</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sr. No.</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Add to Cart</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><image width="150" src ="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRl8QdjhR-bGOACJsTU3qXGSHrz7Tue2yZsNONu4hTLaQ&s=10"></image>
+                <br> Data Structure</td>
+                <td>R.S. SALARIA</td>
+                <td>₹499</td>
+                <td>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td><image width="150" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrplFjIMpW9trdBm6nFne3TscojAk-yiRpDtaedJzZLA&s"></image><br>Web Devlopment</td>
+                <TD>WHITE BELT MASTERY</td><td>₹350</td>
+                <td>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>3</td>
+                <td><image width="150px"src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTB80tXnb7zRJW9mBwaklw9ANXYfAWgsuqvWnp5yDAuhQ&s=10"></image><br>Python</td>
+                
+                <td>DR. KRISHNA KUMAR
+                  </td>
+                  <td>₹550</td>
+                <td>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>4</td>
+                <td><image width="150px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzSqlz_qAOtBxQFUXo66Z0IJ4-c6MzorekmHSGGOOu2Q&s=10"></image><br>Cyber Security</td>
+                <td> WILLEY
+                  </td>
+                  <td>₹400</td>
+                <td>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>5</td>
+                <td><image width="150px"src="https://m.media-amazon.com/images/I/71TuFswqCjL.jpg"></iamge><br>Computer Organization and Architecture</td>
+                <td>WILLIAM STALLINGS
+                  </td>
+                  <td>₹600</td>
+                <td>
+                    <button onclick="addToCart()">Add to Cart</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        let cartCount = 0;
+
+        function addToCart() {
+            cartCount++;
+            document.getElementById("cartCount").innerText = cartCount;
+        }
+    </script>
+
+    
+
+</body>
+</html>
